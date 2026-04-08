@@ -1,0 +1,32 @@
+[2025-03-19 10:01:00] INFO  Build started - commit: a3f9c21 branch: feature/refund-fix
+[2025-03-19 10:01:05] INFO  Running Maven build...
+[2025-03-19 10:01:10] INFO  Compiling source files... OK
+[2025-03-19 10:01:15] INFO  Running unit tests...
+[2025-03-19 10:02:00] INFO  UserAuthTests - STARTED
+[2025-03-19 10:02:01] PASS  test_login_success
+[2025-03-19 10:02:01] PASS  test_login_invalid_password
+[2025-03-19 10:02:01] PASS  test_logout
+[2025-03-19 10:02:13] FAIL  test_token_expiry
+[2025-03-19 10:02:13] ERROR java.net.SocketTimeoutException: Connection timed out
+[2025-03-19 10:02:13] ERROR   at com.app.auth.TokenService.validate(TokenService.java:45)
+[2025-03-19 10:02:13] INFO  PaymentTests - STARTED
+[2025-03-19 10:02:14] PASS  test_payment_success
+[2025-03-19 10:02:14] PASS  test_payment_declined
+[2025-03-19 10:02:16] FAIL  test_refund_processing
+[2025-03-19 10:02:16] ERROR java.lang.NullPointerException
+[2025-03-19 10:02:16] ERROR   at com.app.payment.RefundService.processRefund(RefundService.java:112)
+[2025-03-19 10:02:16] ERROR   at com.app.payment.PaymentController.refund(PaymentController.java:78)
+[2025-03-19 10:02:16] INFO  Recent commit touching RefundService.java: a3f9c21
+[2025-03-19 10:02:16] INFO  Author: dev@company.com - Message: "fix: update refund logic for partial payments"
+[2025-03-19 10:02:46] FAIL  test_payment_gateway_timeout
+[2025-03-19 10:02:46] ERROR java.net.ConnectException: Connection refused to payment-gateway:8443
+[2025-03-19 10:02:46] INFO  OrderTests - STARTED
+[2025-03-19 10:02:47] PASS  test_create_order
+[2025-03-19 10:02:48] FAIL  test_cancel_order
+[2025-03-19 10:02:48] ERROR org.junit.AssertionError: Expected status CANCELLED got PENDING
+[2025-03-19 10:02:48] ERROR   at com.app.order.OrderServiceTest.test_cancel_order(OrderServiceTest.java:88)
+[2025-03-19 10:02:49] ERROR org.postgresql.util.PSQLException: FATAL: connection pool exhausted
+[2025-03-19 10:02:50] INFO  NotificationTests - STARTED
+[2025-03-19 10:02:52] PASS  test_email_notification
+[2025-03-19 10:02:52] INFO  BUILD FAILED - 4 failures, 1 error
+[2025-03-19 10:02:52] INFO  Total time: 67.3 seconds

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="QualityGuard Demo Suite" tests="12" failures="4" errors="1" time="67.3">
+
+  <testsuite name="UserAuthTests" tests="4" failures="1" time="13.1">
+    <testcase name="test_login_success" classname="UserAuthTests" time="0.5"/>
+    <testcase name="test_login_invalid_password" classname="UserAuthTests" time="0.3"/>
+    <testcase name="test_logout" classname="UserAuthTests" time="0.2"/>
+    <testcase name="test_token_expiry" classname="UserAuthTests" time="12.1">
+      <failure message="Connection timeout after 10000ms">
+        java.net.SocketTimeoutException: Connection timed out
+        at com.app.auth.TokenService.validate(TokenService.java:45)
+      </failure>
+    </testcase>
+  </testsuite>
+
+  <testsuite name="PaymentTests" tests="4" failures="2" time="34.1">
+    <testcase name="test_payment_success" classname="PaymentTests" time="1.2"/>
+    <testcase name="test_payment_declined" classname="PaymentTests" time="0.8"/>
+    <testcase name="test_refund_processing" classname="PaymentTests" time="2.1">
+      <failure message="NullPointerException in RefundService">
+        java.lang.NullPointerException
+        at com.app.payment.RefundService.processRefund(RefundService.java:112)
+        at com.app.payment.PaymentController.refund(PaymentController.java:78)
+      </failure>
+    </testcase>
+    <testcase name="test_payment_gateway_timeout" classname="PaymentTests" time="30.0">
+      <failure message="Gateway connection refused">
+        java.net.ConnectException: Connection refused to payment-gateway:8443
+      </failure>
+    </testcase>
+  </testsuite>
+
+  <testsuite name="OrderTests" tests="3" failures="1" errors="1" time="18.1">
+    <testcase name="test_create_order" classname="OrderTests" time="0.9"/>
+    <testcase name="test_cancel_order" classname="OrderTests" time="1.2">
+      <failure message="AssertionError: Expected status CANCELLED got PENDING">
+        org.junit.AssertionError: Expected status CANCELLED got PENDING
+        at com.app.order.OrderServiceTest.test_cancel_order(OrderServiceTest.java:88)
+      </failure>
+    </testcase>
+    <testcase name="test_order_history" classname="OrderTests" time="0.4">
+      <error message="Database connection pool exhausted">
+        org.postgresql.util.PSQLException: FATAL: connection pool exhausted
+        at com.app.db.ConnectionPool.getConnection(ConnectionPool.java:34)
+      </error>
+    </testcase>
+  </testsuite>
+
+  <testsuite name="NotificationTests" tests="1" failures="0" time="2.0">
+    <testcase name="test_email_notification" classname="NotificationTests" time="2.0"/>
+  </testsuite>
+
+</testsuites>
